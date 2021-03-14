@@ -1,4 +1,4 @@
-package test;
+package test.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

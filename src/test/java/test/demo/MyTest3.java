@@ -1,4 +1,4 @@
-package test;
+package test.demo;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
