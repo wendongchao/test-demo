@@ -1,1 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
+.idea/google-java-format.xml
+.idea/libraries/Maven__com_alibaba_QLExpress_3_2_0.xml
+.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_2.xml
+.idea/libraries/Maven__commons_lang_commons_lang_2_4.xml
+.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml
+.idea/libraries/Maven__log4j_log4j_1_2_16.xml
+.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml
+
+target/*
