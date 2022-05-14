@@ -1,5 +1,6 @@
 package test.demo;
 
+import com.netty.kryo.dto.RpcRequest;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -103,6 +104,16 @@ public class MyTest11 extends TestCase {
             list.add(k+"@"+v);
         });
         return list.stream().sorted().collect(Collectors.joining("-"));
+    }
+
+
+    public void test05() {
+        RpcRequest rpcRequest = null;
+        List<RpcRequest> rpcRequests = Arrays.asList(rpcRequest);
+        for (RpcRequest request : rpcRequests) {
+            System.out.println(request);
+        }
+        System.out.println(rpcRequests);
     }
 
 
