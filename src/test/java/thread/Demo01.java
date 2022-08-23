@@ -6,7 +6,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 链接：https://juejin.cn/post/6902655550031413262
@@ -266,6 +265,8 @@ public class Demo01 extends TestCase {
 
     // 6 多个任务的简单组合
 
+    // allof 全部任务都需要执行完，没有返回值
+    // anyOf 其中一个任务执行完即可，有返回值
     public void test15() {
         CompletableFuture<Void> future = CompletableFuture
                 .allOf(CompletableFuture.completedFuture("a"),
@@ -277,6 +278,57 @@ public class Demo01 extends TestCase {
                         CompletableFuture.completedFuture("d"));
         // 其中一个任务执行完即可
         System.out.println(future2.join());
+    }
+
+    // 8 取消执行线程任务
+    // boolean isCancelled() 任务是否取消
+    // boolean cancel(boolean mayInterruptIfRunning) 取消任务，如果任务未完成，则返回异常
+    public void test16() {
+        CompletableFuture<Integer> future = CompletableFuture
+                .supplyAsync(() -> {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                    }
+                    return "hello world";
+                })
+                .thenApply(data -> 1);
+
+        System.out.println("任务取消前："+ future.isCancelled());
+        future.cancel(true);
+        System.out.println("任务取消后："+ future.isCancelled());
+
+        future = future.exceptionally(e -> {
+            e.printStackTrace();
+            return 0;
+        });
+        System.out.println(future.join());
+    }
+
+    // 9 任务的获取和完成与否判断
+    // boolean isDone() 任务是否执行完成
+    // T join() 阻塞等待 获取返回值
+    // T get() 阻塞等待 获取返回值,区别是get需要返回受检异常
+    // T get(long timeout, TimeUnit unit) 等待阻塞一段时间，并获取返回值
+    // T getNow(T valueIfAbsent) 未完成则返回指定value
+    // boolean complete(T value) 未完成，使用value作为任务执行的结果，任务结束。需要future.get获取
+    // boolean completeExceptionally(Throwable ex) 未完成，则是异常调用,返回异常结果，任务结束
+    // boolean isCompletedExceptionally() 判断任务是否因发生异常结束的
+    // void obtrudeValue(T value) 强制地将返回值设置为value，无论该之前任务是否完成；类似complete
+    // void obtrudeException(Throwable ex) 强制地让异常抛出，异常返回，无论该之前任务是否完成；类似completeExceptionally
+    public void test17() {
+        CompletableFuture<Integer> future = CompletableFuture
+                .supplyAsync(() -> {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                    }
+                    return "hello world";
+                })
+                .thenApply(data -> 1);
+        System.out.println("任务完成前："+future.isDone());
+        future.complete(10);
+        System.out.println("任务完成后："+future.join());
     }
 
 }
