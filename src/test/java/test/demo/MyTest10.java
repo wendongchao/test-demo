@@ -247,14 +247,14 @@ public class MyTest10 {
 
     @Test
     public void test16() {
-        System.out.println(HashUtil.javaDefaultHash("entity@0195-period@5-scenario@Actual-year@2022"));
-        System.out.println(HashUtil.javaDefaultHash("entity@0195-period@6-scenario@Actual-year@2022"));
-        System.out.println(HashUtil.javaDefaultHash("entity@0195-period@7-scenario@Actual-year@2022"));
+        System.out.println(HashUtil.javaDefaultHash("eentity@0156-period@9-scenario@Actual-year@2022"));
+        System.out.println(HashUtil.javaDefaultHash("entity@0170-period@9-scenario@Actual-year@2022"));
+        System.out.println(HashUtil.javaDefaultHash("entity@0170-period@9-scenario@Actual-year@2022"));
 
-        System.out.println("----");
-        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@5-scenario@Actual-year@2022"));
-        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@6-scenario@Actual-year@2022"));
-        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@7-scenario@Actual-year@2022"));
+//        System.out.println("----");
+//        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@5-scenario@Actual-year@2022"));
+//        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@6-scenario@Actual-year@2022"));
+//        System.out.println(HashUtil.javaDefaultHash("entity@0196-period@7-scenario@Actual-year@2022"));
     }
 
 }
