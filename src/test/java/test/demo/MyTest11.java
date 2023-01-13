@@ -1,5 +1,6 @@
 package test.demo;
 
+import cn.hutool.core.util.StrUtil;
 import com.netty.kryo.dto.RpcRequest;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class MyTest11 extends TestCase {
         list.add("ee");
         list.add("ff");
         list.add("tt");
-        for (int i = list.size()-1; i > 0; i--) {
+        for (int i = list.size() - 1; i > 0; i--) {
             System.out.println(list.get(i));
         }
 
@@ -97,11 +98,11 @@ public class MyTest11 extends TestCase {
     public String getConDataBlockParam(Map<String, String> map) {
         // 查询条件组装
         List<String> list = new ArrayList<>();
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             if (k.equals("data")) {
                 return;
             }
-            list.add(k+"@"+v);
+            list.add(k + "@" + v);
         });
         return list.stream().sorted().collect(Collectors.joining("-"));
     }
@@ -114,6 +115,24 @@ public class MyTest11 extends TestCase {
             System.out.println(request);
         }
         System.out.println(rpcRequests);
+    }
+
+    public void test06() {
+        String aa = "处置子公司";
+        String bb = "|处置子公司|";
+//        System.out.println(aa.equals(bb));
+//        System.out.println(aa.contains(bb));
+        System.out.println(bb.contains(aa));
+
+        List<Integer> list = Arrays.asList(0, 2, 3, -1, -6, 98);
+        System.out.println(list.stream().sorted().collect(Collectors.toList()));
+    }
+
+    public void test07() {
+        Object obj = " ";
+        System.out.println(obj != null);
+        System.out.println(StrUtil.isBlank(obj.toString()));
+        System.out.println(obj.toString().length());
     }
 
 
