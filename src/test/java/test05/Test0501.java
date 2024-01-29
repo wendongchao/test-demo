@@ -3,12 +3,14 @@ package test05;
 import junit.framework.TestCase;
 
 import java.io.FileInputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @auther wendongchao
@@ -278,6 +280,125 @@ public class Test0501 extends TestCase {
 
         System.out.println(str.substring(44, str.length()));
 
+    }
+
+    public void test09() {
+        String str = "20000314-BMT-国投新疆罗布泊钾盐有限责任公司-所有部门";
+        int index = str.indexOf("-");
+        System.out.println(str.indexOf("-"));
+        System.out.println(str.substring(0, index));
+        System.out.println(str.substring(index+1, str.length()));
+    }
+
+
+    public void test10() {
+        List<Integer> list = IntStream.rangeClosed(1, 30)
+                .boxed()
+                .collect(Collectors.toList());
+
+        List<List<Integer>> resultList = IntStream.range(0, list.size())
+                .boxed()
+                .filter(i -> i % 9 == 0)
+                .map(i -> list.subList(i, Math.min(i + 9, list.size())))
+                .collect(Collectors.toList());
+
+// 打印结果
+        for (List<Integer> subList : resultList) {
+            System.out.println(subList);
+        }
+
+    }
+
+    public void test11() {
+
+        String columnName ="应收/应付利息合计-对账";
+        String str ="对账";
+        String substring = columnName.substring(columnName.length() - str.length(), columnName.length());
+        System.out.println(substring);
+        if (str.equals(substring)) {
+            int index = columnName.indexOf(str);
+            String substring1 = columnName.substring(index-1);
+            String bb = "-"+str;
+            if (bb.equals(substring1)) {
+                System.out.println("ok");
+            }
+            System.out.println(substring1);
+        }
+
+    }
+
+    public void test12() {
+        String pro = ",enumerate(1,C201),match_name";
+        System.out.println(enumStr(pro));
+        String a = "(";
+        String b = ")";
+        System.out.println(a);
+    }
+
+    private String enumStr(String property) {
+        if (property.length() > 0 && property.indexOf("enumerate") != -1) {
+            int index = property.indexOf("enumerate");
+            if (index + 1 < property.length()) {
+                char[] charArray = property.toCharArray();
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = index; i < charArray.length; i++) {
+                    stringBuffer.append(charArray[i]);
+                    if (charArray[i] == ')') {
+                        break;
+                    }
+                }
+                return stringBuffer.toString();
+            }
+        }
+        return null;
+    }
+
+    public void test13() {
+        String columnName ="应收/应付利息合计-对账";
+        int index1 = columnName.indexOf("-对账");
+        String substring = columnName.substring(0, index1);
+        System.out.println(substring);
+    }
+
+    public void test14() {
+        int dataScale = 8;
+        int temp = 1;
+        for (int i = 0; i < dataScale; i++) {
+            temp = temp * 10;
+        }
+        System.out.println(temp);
+        System.out.println(new BigDecimal(temp));
+    }
+
+    public void test15() {
+        String str = "企业全称（简体中文）";
+        String str2 = "企业全称（简体中文）";
+        System.out.println(str.equals(str2));
+    }
+
+    public void test16() {
+        String str = " .123";
+        char[] charArray = str.trim().toCharArray();
+        System.out.println(charArray[0]);
+        System.out.println(charArray[0] == '.');
+    }
+
+    public void test17() {
+        String str = "123";
+        String str2 = "宁波";
+        String str3 = "ningbo";
+        System.out.println(str.matches("\\d+"));
+        System.out.println(str2.matches("\\d+"));
+        System.out.println(str3.matches("\\d+"));
+    }
+
+    public void test18() {
+        String str = "22,444.88";
+        System.out.println(str.replace(",", ""));
+
+        String str2 = "2.2239905269111E11";
+        BigDecimal bigDecimal2 = new BigDecimal(str2);
+        System.out.println(bigDecimal2.toPlainString());
     }
 
 
